@@ -11,16 +11,12 @@ screen = pygame.display.set_mode((screen_width, screen_height))
 color = (255, 255, 255)
 clock = pygame.time.Clock()
 
-def createGrid():
-    screen.fill((0, 0, 0))
-    # create grids
-    for row in range(15):
-     for col in range(15):
-           x = row * 20
-           y = col * 20
-           pygame.draw.rect(screen, color, pygame.Rect(x, y, 20, 20), 2)
 
-
+# created game over screen
+def gameOverScreen():
+    font = pygame.font.Font(None, 60)
+    text = font.render("Game Over!", True, (255, 255, 255))
+    screen.blit(text, (screen_width // 2 - text.get_width() // 2, screen_height // 2 - text.get_height() // 2))
 
 # Main Game loop
 while True:
@@ -28,7 +24,7 @@ while True:
         if event.type == pygame.QUIT:
             sys.exit()
 
-    createGrid()
+    gameOverScreen()
 
     pygame.display.flip()
 
