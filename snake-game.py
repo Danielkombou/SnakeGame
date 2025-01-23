@@ -1,21 +1,26 @@
 import pygame
 import sys
+import random
 import time
 
 pygame.init()
 # screen settings
-screen_width = 255
-screen_height = 255
+screen_width = 300
+screen_height = 300
 screen = pygame.display.set_mode((screen_width, screen_height))
 
 color =(255,255,255)
 clock = pygame.time.Clock()
 
 # snake_position
-snake_position = [100,50]
+snake_position = [150,1]
+
+# fruit position
+fruit_position = [random.randrange(1, (screen_width//10)) * 10, 
+                  random.randrange(1, (screen_height//10)) * 10]
 
 # snake_body
-snake_body = [[100,50],[90,50],[80,50]]
+snake_body = [[100,50]]
 
 #window size
 window_x = 720
@@ -87,13 +92,13 @@ while True:
     for pos in snake_body:
         pygame.draw.rect(screen, (0, 255, 0), pygame.Rect(pos[0], pos[1], 10, 10))
 
-    # Detect collision with the wall
-    if snake_position[0] < 0 or snake_position[0] > window_x-10:
-        game_over()
-    if snake_position[1] < 0 or snake_position[1] > window_y-10:
-        game_over()
+    # # Detect collision with the wall
+    # if snake_position[0] < 0 or snake_position[0] > window_x-10:
+    #     game_over()
+    # if snake_position[1] < 0 or snake_position[1] > window_y-10:
+    #     game_over()
 
-    # Touching the snake body
-    for block in snake_body[1:]:
-        if snake_position[0] == block[0] and snake_position[1] == block[1]:
-            game_over()
+    # # Touching the snake body
+    # for block in snake_body[1:]:
+    #     if snake_position[0] == block[0] and snake_position[1] == block[1]:
+    #         game_over()
