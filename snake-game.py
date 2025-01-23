@@ -1,5 +1,6 @@
 import pygame
 import sys
+import random
 import time
 
 pygame.init()
@@ -12,21 +13,16 @@ color =(255,255,255)
 clock = pygame.time.Clock()
 
 # snake_position
-snake_position = [100,50]
+snake_position = [150,1]
+
+# fruit position
+fruit_position = [random.randrange(1, (screen_width//10)) * 10, 
+                  random.randrange(1, (screen_height//10)) * 10]
 
 # snake_body
-snake_body = [[100,50],[90,50],[80,50]]
+snake_body = [[100,50]]
 
 
-# create display layout
-def createGrid():
-    screen.fill((0, 0, 0))
-    # create grids
-    for row in range(15):
-        for col in range(15):
-            x = row * 20
-            y = col * 20
-            pygame.draw.rect(screen, color, pygame.Rect(x, y, 20, 20), 2)
 
 
 while True:
@@ -34,7 +30,17 @@ while True:
         if event.type == pygame.QUIT:
             sys.exit()
             
-    createGrid()
+    
+    for pos in snake_body:
+        pygame.draw.rect(screen, (255,0,0), pygame.Rect(pos[0], pos[0], 15, 15))
+
+    pygame.draw.rect(screen, (0,255,0), pygame.Rect(fruit_position[0], fruit_position[1], 30, 15))
+    
+    # # Touching the snake body
+    # for block in snake_body[1:]:
+    #     if snake_position[0] == block[0] and snake_position[1] == block[1]:
+    #         game_over()
+    
     pygame.display.flip()
     pygame.display.update()
     clock.tick(60)  
