@@ -3,6 +3,7 @@ import sys
 import random
 import time
 
+
 pygame.init()
 # screen settings
 screen_width = 720
@@ -94,31 +95,31 @@ while True:
                 change_to = "LEFT"
             elif event.key == pygame.K_RIGHT and direction != "LEFT":
                 change_to = "RIGHT"
-                
-           
-           
-    # Move the snake's head
+
+    # Update the direction
+        direction = change_to
+
+     # Move the snake's head
         if direction == "UP":
           snake_position[1] -= 10
         if direction == "DOWN":
-          snake_position[1] += 10
+         snake_position[1] += 10
         if direction == "LEFT":
-          snake_position[0] -= 10
+         snake_position[0] -= 10
         if direction == "RIGHT":
-          snake_position[0] += 10
-
-    # Update the snake's body
-        snake_body.insert(0, list(snake_position))  # Add new head position
-        snake_body.pop()  
-        clock.tick(60)  
+         snake_position[0] += 10
+   
+   
+       snake_body.insert(0, list(snake_position))  # Add new head position
+       snake_body.pop()  # Remove the last segment for constant length
 
        for pos in snake_body:
-        pygame.draw.rect(screen, (0, 255, 0), pygame.Rect(pos[0], pos[1], 10, 10))
+          pygame.draw.rect(screen, (0, 255, 0), pygame.Rect(pos[0], pos[1], 10, 10))
 
-        pygame.draw.rect(screen,(255,0,0), pygame.Rect(fruit_position[0], fruit_position[1], 10,10))
+       pygame.draw.rect(screen,(255,0,0), pygame.Rect(fruit_position[0], fruit_position[1], 10,10))
 
-        pygame.display.flip()
-        pygame.display.update()
+       pygame.display.flip()
+       pygame.display.update()
 
     # # Detect collision with the wall
     # if snake_position[0] < 0 or snake_position[0] > window_x-10:
