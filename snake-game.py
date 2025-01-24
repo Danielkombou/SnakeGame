@@ -26,7 +26,8 @@ fruit_position = [
 snake_body = [[100, 50],[90,50],[80,50]]
 
 speed=10
-# # initial score
+
+# initial score
 score = 0
 
 direction = "RIGHT"  # Initial direction
@@ -106,3 +107,4 @@ while True:
     for block in snake_body[1:]:
         if snake_position[0] == block[0] and snake_position[1] == block[1]:
             game_over()
+
