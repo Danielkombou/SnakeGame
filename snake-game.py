@@ -5,32 +5,33 @@ import time
 
 pygame.init()
 # screen settings
-screen_width = 300
-screen_height = 300
+screen_width = 720
+screen_height = 800
 screen = pygame.display.set_mode((screen_width, screen_height))
 
-color =(255,255,255)
+color = (255, 255, 255)
 clock = pygame.time.Clock()
 
 # snake_position
 snake_position = [150,100]
 
 # fruit position
-fruit_position = [random.randrange(1, (screen_width//10)) * 10, 
-                  random.randrange(1, (screen_height//10)) * 10]
+fruit_position = [                             
+    random.randrange(1, (screen_width // 10)) * 10,
+    random.randrange(1, (screen_height // 10)) * 10,
+]
 
 # snake_body
 snake_body = [[100,50],[90,50],[80,50]]
 
-#window size
-window_x = 720
-window_y = 480
+game_window = pygame.display.set_mode((screen_width,screen_height))
 
-# initial score
+speed=10
+# # initial score
 score = 0
 
-# display window
-game_window = pygame.display.set_mode((window_x, window_y))
+direction = "RIGHT"  # Initial direction
+change_to = direction  # To change direction
 
 
 def show_score(choice, color, font, size):
@@ -44,7 +45,7 @@ def game_over():
     game_over_surface = my_font.render(
         'Your Score is : ' + str(score), True, (255, 0, 0))
     game_over_rect = game_over_surface.get_rect()
-    game_over_rect.midtop = (window_x/2, window_y/4)
+    game_over_rect.midtop = (screen_width/2, screen_height/4)
     game_window.blit(game_over_surface, game_over_rect)
     pygame.display.flip()
     time.sleep(2)
@@ -52,9 +53,11 @@ def game_over():
     quit()
 
 
+# game loop
 while True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
+            pygame.quit()
             sys.exit()
             
     pygame.display.update()
@@ -65,16 +68,16 @@ while True:
 
     pygame.draw.rect(screen, (255, 0, 0), pygame.Rect(fruit_position[0], fruit_position[1], 10, 10))
 
-    # Detect collision with the wall
-    if snake_position[0] < 0 or snake_position[0] > window_x-10:
-        game_over()
-    if snake_position[1] < 0 or snake_position[1] > window_y-10:
-        game_over()
+    # # Detect collision with the wall
+    # if snake_position[0] < 0 or snake_position[0] > window_x-10:
+    #     game_over()
+    # if snake_position[1] < 0 or snake_position[1] > window_y-10:
+    #     game_over()
 
-    # Touching the snake body
-    for block in snake_body[1:]:
-        if snake_position[0] == block[0] and snake_position[1] == block[1]:
-            game_over()
+    # # Touching the snake body
+    # for block in snake_body[1:]:
+    #     if snake_position[0] == block[0] and snake_position[1] == block[1]:
+    #         game_over()
 
     # displaying score continuously
     show_score(1, (255, 255 ,255), 'times new roman', 20)
