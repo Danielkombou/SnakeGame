@@ -1,3 +1,4 @@
+
 import pygame
 import sys
 import random
@@ -33,56 +34,28 @@ direction = "RIGHT"  # Initial direction
 change_to = direction  # To change direction
 
 
-def show_score(choice, color, font, size):
-  
-    # creating font object score_font
-    score_font = pygame.font.SysFont(font, size)
-    
-    # create the display surface object 
-    # score_surface
-    score_surface = score_font.render('Score : ' + str(score), True, color)
-    
-    # create a rectangular object for the text
-    # surface object
-    score_rect = score_surface.get_rect()
-    
-    # displaying text
+def show_score(choice, color, font, size):  
+    score_font = pygame.font.SysFont(font, size)    
+    score_surface = score_font.render('Score : ' + str(score), True, color)    
+    score_rect = score_surface.get_rect()    
     screen.blit(score_surface, score_rect)
 
-def game_over():
-  
-    # creating font object my_font
-    my_font = pygame.font.SysFont('times new roman', 50)
-    
-    # creating a text surface on which text 
-    # will be drawn
+def game_over():  
+    my_font = pygame.font.SysFont('times new roman', 50)    
     game_over_surface = my_font.render(
-        'Your Score is : ' + str(score), True, (255, 0, 0))
-    
-    # create a rectangular object for the text 
-    # surface object
-    game_over_rect = game_over_surface.get_rect()
-    
-    # setting position of the text
-    game_over_rect.midtop = (screen_width/2, screen_height/4)
-    
-    # blit will draw the text on screen
+        'Your Score is : ' + str(score), True, (255, 0, 0))    
+    game_over_rect = game_over_surface.get_rect()    
+    game_over_rect.midtop = (screen_width/2, screen_height/4)    
     screen.blit(game_over_surface, game_over_rect)
-    pygame.display.flip()
-    
-    # after 2 seconds we will quit the program
-    time.sleep(2)
-    
-    # deactivating pygame library
-    pygame.quit()
-    
-    # quit the program
+    pygame.display.flip()    
+    time.sleep(2)    
+    pygame.quit()    
     quit()
 
 
 # game loop
 while True:
-       for event in pygame.event.get():
+    for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
             sys.exit()
@@ -121,14 +94,16 @@ while True:
        pygame.display.flip()
        pygame.display.update()
 
-    # # Detect collision with the wall
-    # if snake_position[0] < 0 or snake_position[0] > window_x-10:
-    #     game_over()
-    # if snake_position[1] < 0 or snake_position[1] > window_y-10:
-    #     game_over()
+    # displaying score continuously
+    show_score(1, (255, 255, 255), 'times new roman', 20)
 
-    # # Touching the snake body
-    # for block in snake_body[1:]:
-    #     if snake_position[0] == block[0] and snake_position[1] == block[1]:
-    #         game_over()
+    # Detect collision with the wall
+    if snake_position[0] < 0 or snake_position[0] > screen_width-10:
+        game_over()
+    if snake_position[1] < 0 or snake_position[1] > screen_height-10:
+        game_over()
 
+    # Touching the snake body
+    for block in snake_body[1:]:
+        if snake_position[0] == block[0] and snake_position[1] == block[1]:
+            game_over()
