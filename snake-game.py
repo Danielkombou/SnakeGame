@@ -6,11 +6,11 @@ import time
 
 pygame.init()
 # screen settings
-screen_width = 720
+screen_width = 800
 screen_height = 800
 screen = pygame.display.set_mode((screen_width, screen_height))
 
-color = (255, 255, 255)
+color = (25, 25, 25)
 clock = pygame.time.Clock()
 
 # snake_position
@@ -27,6 +27,13 @@ fruit_position = [
 # snake_body
 snake_body = [[100, 50], [90, 50], [80, 50]]
 
+def createGrid():
+    for x in range(10, screen_width, 10):
+            pygame.draw.line(screen,(25,25,25),(x,0),(x,screen_height))
+    for y in range(10, screen_height, 10):
+            pygame.draw.line(screen,(25,25,25),(0,y),(screen_width,y))
+
+grid=[]
 speed = 10
 # # initial score
 score = 0
@@ -85,6 +92,7 @@ while True:
     if direction == "RIGHT":
         snake_position[0] += 10
 
+
     # Update the snake's body
     snake_body.insert(0, list(snake_position))  # Add new head position
     snake_body.pop()  # Remove the last segment for constant length
@@ -100,6 +108,8 @@ while True:
     pygame.draw.rect(
         screen, (255, 0, 0), pygame.Rect(fruit_position[0], fruit_position[1], 10, 10)
     )
+    createGrid()
+
 
     # Detect collision with the fruit
     if (
