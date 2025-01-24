@@ -16,6 +16,8 @@ clock = pygame.time.Clock()
 # snake_position
 snake_position = [100, 50]
 
+fruit_spawn = True
+
 # fruit position
 fruit_position = [
     random.randrange(1, (screen_width // 10)) * 10,
@@ -25,9 +27,8 @@ fruit_position = [
 # snake_body
 snake_body = [[100, 50], [90, 50], [80, 50]]
 
-speed=10
-
-# initial score
+speed = 10
+# # initial score
 score = 0
 
 direction = "RIGHT"  # Initial direction
@@ -133,3 +134,19 @@ while True:
     for block in snake_body[1:]:
         if snake_position[0] == block[0] and snake_position[1] == block[1]:
             game_over()
+
+    # Snake body growing mechanism
+    # if fruits and snakes collide then scores
+    # will be incremented by 10
+    snake_body.insert(0, list(snake_position))
+    if snake_position[0] == fruit_position[0] and snake_position[1] == fruit_position[1]:
+        score += 10
+        fruit_spawn = False
+    else:
+        snake_body.pop()
+        
+    if not fruit_spawn:
+        fruit_position = [random.randrange(1, (screen_width//10)) * 10, 
+                          random.randrange(1, (screen_height//10)) * 10]
+        
+    fruit_spawn = True        
