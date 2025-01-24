@@ -83,16 +83,16 @@ while True:
          snake_position[0] += 10
    
    
-       snake_body.insert(0, list(snake_position))  # Add new head position
-       snake_body.pop()  # Remove the last segment for constant length
+        snake_body.insert(0, list(snake_position))  # Add new head position
+        snake_body.pop()  # Remove the last segment for constant length
 
-       for pos in snake_body:
+        for pos in snake_body:
           pygame.draw.rect(screen, (0, 255, 0), pygame.Rect(pos[0], pos[1], 10, 10))
 
-       pygame.draw.rect(screen,(255,0,0), pygame.Rect(fruit_position[0], fruit_position[1], 10,10))
+        pygame.draw.rect(screen,(255,0,0), pygame.Rect(fruit_position[0], fruit_position[1], 10,10))
 
-       pygame.display.flip()
-       pygame.display.update()
+        pygame.display.flip()
+        pygame.display.update()
 
     # displaying score continuously
     show_score(1, (255, 255, 255), 'times new roman', 20)
